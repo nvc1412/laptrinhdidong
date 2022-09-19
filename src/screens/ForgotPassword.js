@@ -3,16 +3,12 @@ import MainButton from "../components/MainButton";
 import MainLogo from "../components/MainLogo";
 import MainInput from "../components/MainInput";
 
-export default function Signin({ navigation }) {
-  function goForgotPassword() {
-    navigation.navigate("ForgotPassword");
-  }
+export default function ForgotPassword() {
   return (
     <View style={styles.main}>
-      <MainLogo txt="Sign in" />
+      <MainLogo txt="Forgot Password" />
 
       <MainInput placeholder="E-mail or Phone Number" />
-      <MainInput placeholder="Password" />
 
       <View
         style={{
@@ -24,17 +20,7 @@ export default function Signin({ navigation }) {
           backgroundColor="#3975e8"
           borderColor="#3975e8"
           txtcolor="white"
-          txt="Log In"
-        />
-
-        <Text style={{ fontSize: 20, color: "grey", marginTop: 30 }}>OR</Text>
-
-        <MainButton
-          backgroundColor="#3b5998"
-          borderColor="#3b5998"
-          txtcolor="white"
-          txt="Forgot Password"
-          onPress={goForgotPassword}
+          txt="Submit"
         />
       </View>
     </View>

@@ -2,20 +2,36 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import React from "react";
 
 export default function MainButton(props) {
+  const { txt, backgroundColor, borderColor, txtcolor, onPress } = props;
   return (
-    <View
+    // <View
+    //   style={[
+    //     styles.main,
+    //     {
+    //       backgroundColor: props.backgroundColor,
+    //       borderColor: props.borderColor,
+    //     },
+    //   ]}
+    // >
+    //   <Text style={{ color: props.txtcolor, fontSize: 15, fontWeight: "500" }}>
+    //     {props.txt}
+    //   </Text>
+    // </View>
+
+    <Button
       style={[
         styles.main,
         {
           backgroundColor: props.backgroundColor,
           borderColor: props.borderColor,
+          color: props.txtcolor,
+          fontSize: 15,
+          fontWeight: "500",
         },
       ]}
-    >
-      <Text style={{ color: props.txtcolor, fontSize: 15, fontWeight: "500" }}>
-        {props.txt}
-      </Text>
-    </View>
+      title={props.txt}
+      onPress={props.onPress}
+    ></Button>
   );
 }
 

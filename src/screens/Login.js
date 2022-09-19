@@ -2,36 +2,46 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import MainButton from "../components/MainButton";
 import MainLogo from "../components/MainLogo";
 
-export default Login = () => (
-  <View style={styles.main}>
-    <Image source={require("../../assets/login.png")} />
+export default function Login({ navigation }) {
+  function goSignin() {
+    navigation.navigate("Signin");
+  }
+  function goSignup() {
+    navigation.navigate("Signup");
+  }
+  return (
+    <View style={styles.main}>
+      <Image source={require("../../assets/login.png")} />
 
-    <MainLogo txt="Welcome to your" />
+      <MainLogo txt="Welcome to your" />
 
-    <Text style={{ marginTop: 30, textAlign: "center" }}>
-      Welcome to your app. Build your own social network in minutes.
-    </Text>
+      <Text style={{ marginTop: 30, textAlign: "center" }}>
+        Welcome to your app. Build your own social network in minutes.
+      </Text>
 
-    <MainButton
-      backgroundColor="#3975e8"
-      borderColor="#3975e8"
-      txtcolor="white"
-      txt="Log In"
-    />
+      <MainButton
+        backgroundColor="#3975e8"
+        borderColor="#3975e8"
+        txtcolor="red"
+        txt="Log In"
+        onPress={goSignin}
+      />
 
-    <MainButton
-      backgroundColor="white"
-      borderColor="#3975e8"
-      txtcolor="#3975e8"
-      txt="Sign Up"
-    />
-  </View>
-);
+      <MainButton
+        backgroundColor="white"
+        borderColor="#3975e8"
+        txtcolor="#3975e8"
+        txt="Sign Up"
+        onPress={goSignup}
+      />
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   main: {
-    width: "100%",
-    height: 700,
+    flex: 1,
+    backgroundColor: "#f8f8ff",
     alignItems: "center",
     justifyContent: "center",
   },

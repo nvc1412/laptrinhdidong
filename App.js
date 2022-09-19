@@ -1,6 +1,6 @@
 import React from "react";
-import Login from "./src/screens/Login";
+import MainNavigator from "./src/navigation/AppNavigation";
 
 export default function App() {
-  return <Login />;
+  return <MainNavigator></MainNavigator>;
 }

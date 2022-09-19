@@ -27,8 +27,8 @@ export default Signup = () => (
 
 const styles = StyleSheet.create({
   main: {
-    width: "100%",
-    height: 700,
+    flex: 1,
+    backgroundColor: "#f8f8ff",
     alignItems: "center",
     justifyContent: "center",
   },
