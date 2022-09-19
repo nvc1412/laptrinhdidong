@@ -5,7 +5,7 @@ import MainInput from "../components/MainInput";
 
 export default Signup = () => (
   <View style={{ marginTop: 70 }}>
-    <MainLogo txt="Create new account" />
+    <MainLogo title="Create new account" />
 
     <MainInput placeholder="Full Name" />
     <MainInput placeholder="Phone Number" />
@@ -16,10 +16,8 @@ export default Signup = () => (
       style={{ width: "100%", alignItems: "center", justifyContent: "center" }}
     >
       <MainButton
-        backgroundColor="#3b5998"
-        borderColor="#3b5998"
-        txtcolor="white"
-        txt="Sign Up"
+        backgroundColor={{ backgroundColor: "#3b5998" }}
+        title="Sign Up"
       />
     </View>
   </View>

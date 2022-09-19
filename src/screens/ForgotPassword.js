@@ -6,7 +6,7 @@ import MainInput from "../components/MainInput";
 export default function ForgotPassword() {
   return (
     <View style={styles.main}>
-      <MainLogo txt="Forgot Password" />
+      <MainLogo title="Forgot Password" />
 
       <MainInput placeholder="E-mail or Phone Number" />
 
@@ -16,12 +16,7 @@ export default function ForgotPassword() {
           justifyContent: "center",
         }}
       >
-        <MainButton
-          backgroundColor="#3975e8"
-          borderColor="#3975e8"
-          txtcolor="white"
-          txt="Submit"
-        />
+        <MainButton title="Submit" />
       </View>
     </View>
   );

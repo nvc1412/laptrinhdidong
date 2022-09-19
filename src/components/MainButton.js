@@ -1,37 +1,12 @@
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import React from "react";
 
 export default function MainButton(props) {
-  const { txt, backgroundColor, borderColor, txtcolor, onPress } = props;
+  const { title, onPress, color, backgroundColor } = props;
   return (
-    // <View
-    //   style={[
-    //     styles.main,
-    //     {
-    //       backgroundColor: props.backgroundColor,
-    //       borderColor: props.borderColor,
-    //     },
-    //   ]}
-    // >
-    //   <Text style={{ color: props.txtcolor, fontSize: 15, fontWeight: "500" }}>
-    //     {props.txt}
-    //   </Text>
-    // </View>
-
-    <Button
-      style={[
-        styles.main,
-        {
-          backgroundColor: props.backgroundColor,
-          borderColor: props.borderColor,
-          color: props.txtcolor,
-          fontSize: 15,
-          fontWeight: "500",
-        },
-      ]}
-      title={props.txt}
-      onPress={props.onPress}
-    ></Button>
+    <TouchableOpacity style={[styles.main, backgroundColor]} onPress={onPress}>
+      <Text style={[styles.title, color]}>{title}</Text>
+    </TouchableOpacity>
   );
 }
 
@@ -44,5 +19,12 @@ const styles = StyleSheet.create({
     marginTop: 30,
     justifyContent: "center",
     alignItems: "center",
+    borderColor: "#3975e8",
+    backgroundColor: "#3975e8",
+  },
+  title: {
+    fontSize: 15,
+    fontWeight: "500",
+    color: "#fff",
   },
 });

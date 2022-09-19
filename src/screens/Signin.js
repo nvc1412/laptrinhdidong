@@ -9,7 +9,7 @@ export default function Signin({ navigation }) {
   }
   return (
     <View style={styles.main}>
-      <MainLogo txt="Sign in" />
+      <MainLogo title="Sign in" />
 
       <MainInput placeholder="E-mail or Phone Number" />
       <MainInput placeholder="Password" />
@@ -20,20 +20,13 @@ export default function Signin({ navigation }) {
           justifyContent: "center",
         }}
       >
-        <MainButton
-          backgroundColor="#3975e8"
-          borderColor="#3975e8"
-          txtcolor="white"
-          txt="Log In"
-        />
+        <MainButton title="Log In" />
 
         <Text style={{ fontSize: 20, color: "grey", marginTop: 30 }}>OR</Text>
 
         <MainButton
-          backgroundColor="#3b5998"
-          borderColor="#3b5998"
-          txtcolor="white"
-          txt="Forgot Password"
+          backgroundColor={{ backgroundColor: "#3b5998" }}
+          title="Forgot Password"
           onPress={goForgotPassword}
         />
       </View>

@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import MainButton from "../components/MainButton";
 import MainLogo from "../components/MainLogo";
+import React from "react";
 
 export default function Login({ navigation }) {
   function goSignin() {
@@ -13,25 +14,18 @@ export default function Login({ navigation }) {
     <View style={styles.main}>
       <Image source={require("../../assets/login.png")} />
 
-      <MainLogo txt="Welcome to your" />
+      <MainLogo title="Welcome to your" />
 
       <Text style={{ marginTop: 30, textAlign: "center" }}>
         Welcome to your app. Build your own social network in minutes.
       </Text>
 
-      <MainButton
-        backgroundColor="#3975e8"
-        borderColor="#3975e8"
-        txtcolor="red"
-        txt="Log In"
-        onPress={goSignin}
-      />
+      <MainButton title={"Log In"} onPress={goSignin} />
 
       <MainButton
-        backgroundColor="white"
-        borderColor="#3975e8"
-        txtcolor="#3975e8"
-        txt="Sign Up"
+        backgroundColor={{ backgroundColor: "#fff" }}
+        color={{ color: "#3975e8" }}
+        title={"Sign Up"}
         onPress={goSignup}
       />
     </View>

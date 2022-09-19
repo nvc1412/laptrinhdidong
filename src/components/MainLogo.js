@@ -4,7 +4,7 @@ import React from "react";
 export default function MainLogo(props) {
   return (
     <Text style={{ color: "#719ced", fontSize: 25, margin: 15 }}>
-      {props.txt}
+      {props.title}
     </Text>
   );
 }
