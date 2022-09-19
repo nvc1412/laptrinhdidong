@@ -1,5 +1,6 @@
 import React from "react";
-import AppNavigation from "./src/navigation/AppNavigation";
+import Login from "./src/screens/Login";
+
 export default function App() {
-  return <AppNavigation />;
+  return <Login />;
 }

@@ -2,7 +2,8 @@ import { StyleSheet, Text, View } from "react-native";
 import MainButton from "../components/MainButton";
 import MainLogo from "../components/MainLogo";
 import MainInput from "../components/MainInput";
-const Signup = () => (
+
+export default Signup = () => (
   <View style={{ marginTop: 70 }}>
     <MainLogo txt="Create new account" />
 
@@ -32,5 +33,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-export default Signup();

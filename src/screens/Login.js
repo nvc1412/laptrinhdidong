@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import MainButton from "../components/MainButton";
 import MainLogo from "../components/MainLogo";
 
-const Login = () => (
+export default Login = () => (
   <View style={styles.main}>
     <Image source={require("../../assets/login.png")} />
 
@@ -36,5 +36,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-export default Login();
