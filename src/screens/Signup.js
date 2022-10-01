@@ -6,10 +6,10 @@ import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default Signup = ({ navigation }) => {
-  const [name, setname] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState("abc");
+  const [phone, setPhone] = useState("123");
+  const [email, setEmail] = useState("abc@gmail.com");
+  const [password, setPassword] = useState("123");
 
   const onSignUp = () => {
     if (name.trim() == "" || !name) {
@@ -61,7 +61,7 @@ export default Signup = ({ navigation }) => {
     <View style={{ marginTop: 70 }}>
       <MainLogo title="Create new account" />
 
-      <MainInput placeholder="Full Name" value={name} onchangeText={setname} />
+      <MainInput placeholder="Full Name" value={name} onchangeText={setName} />
       <MainInput
         placeholder="Phone Number"
         value={phone}

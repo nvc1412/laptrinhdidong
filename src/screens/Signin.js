@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import MainButton from "../components/MainButton";
 import MainLogo from "../components/MainLogo";
 import MainInput from "../components/MainInput";
@@ -30,19 +30,20 @@ export default function Signin({ navigation }) {
       if (arr.length > 0) {
         let curUser = arr[0];
         AsyncStorage.setItem("curUser", JSON.stringify(curUser));
-        navigation.replace("HomeTab");
+        Alert.alert("Đăng nhập thành công!");
+        navigation.replace("Login");
       } else alert("Email hoặc mật khẩu không chính xác!");
     } else {
       alert("Email hoặc mật khẩu không chính xác!");
     }
   };
-  const checkLogin = async () => {
-    let userData = await AsyncStorage.getItem("curUser");
-    if (userData) navigation.replace("HomeTab");
-  };
-  useEffect(() => {
-    checkLogin();
-  }, []);
+  // const checkLogin = async () => {
+  //   let userData = await AsyncStorage.getItem("curUser");
+  //   if (userData) navigation.replace("Sigin");
+  // };
+  // useEffect(() => {
+  //   checkLogin();
+  // }, []);
 
   function goForgotPassword() {
     navigation.navigate("ForgotPassword");
