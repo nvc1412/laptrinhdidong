@@ -5,12 +5,14 @@ import MainInput from "../components/MainInput";
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default Signup = ({ navigation }) => {
-  const [name, setName] = useState("abc");
-  const [phone, setPhone] = useState("123");
-  const [email, setEmail] = useState("abc@gmail.com");
-  const [password, setPassword] = useState("123");
-
+export default function Signup({ navigation }) {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const onGoBack = () => {
+    navigation.goBack();
+  };
   const onSignUp = () => {
     if (name.trim() == "" || !name) {
       alert("Không được để trống họ và tên !");
@@ -93,7 +95,7 @@ export default Signup = ({ navigation }) => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   main: {
