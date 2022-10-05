@@ -6,10 +6,10 @@ import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Signup({ navigation }) {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setname] = useState("");
+  const [phone, setphone] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
   const onGoBack = () => {
     navigation.goBack();
   };
@@ -63,23 +63,22 @@ export default function Signup({ navigation }) {
     <View style={{ marginTop: 70 }}>
       <MainLogo title="Create new account" />
 
-      <MainInput placeholder="Full Name" value={name} onchangeText={setName} />
+      <MainInput placeholder="Full Name" value={name} onChangeText={setname} />
       <MainInput
         placeholder="Phone Number"
         value={phone}
-        onchangeText={setPhone}
+        onChangeText={setphone}
       />
       <MainInput
         placeholder="E-mail Adress"
         value={email}
-        onchangeText={setEmail}
+        onChangeText={setemail}
       />
       <MainInput
         placeholder="Password"
         value={password}
-        onchangeText={setPassword}
+        onChangeText={setpassword}
       />
-
       <View
         style={{
           width: "100%",
