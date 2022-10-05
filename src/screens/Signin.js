@@ -17,33 +17,33 @@ export default function Signin({ navigation }) {
       login();
     }
   };
-  // const login = async () => {
-  //   let userData = await AsyncStorage.getItem("userData");
-  //   if (userData) {
-  //     userData = JSON.parse(userData);
-  //     let arr = [...userData];
-  //     arr = arr.filter(
-  //       (value) =>
-  //         value.email.toLocaleLowerCase() == email.toLocaleLowerCase() &&
-  //         value.password == password
-  //     );
-  //     if (arr.length > 0) {
-  //       let curUser = arr[0];
-  //       AsyncStorage.setItem("curUser", JSON.stringify(curUser));
-  //       Alert.alert("Đăng nhập thành công!");
-  //       navigation.replace("Login");
-  //     } else alert("Email hoặc mật khẩu không chính xác!");
-  //   } else {
-  //     alert("Email hoặc mật khẩu không chính xác!");
-  //   }
+  const login = async () => {
+    let userData = await AsyncStorage.getItem("userData");
+    if (userData) {
+      userData = JSON.parse(userData);
+      let arr = [...userData];
+      arr = arr.filter(
+        (value) =>
+          value.email.toLocaleLowerCase() == email.toLocaleLowerCase() &&
+          value.password == password
+      );
+      if (arr.length > 0) {
+        let curUser = arr[0];
+        AsyncStorage.setItem("curUser", JSON.stringify(curUser));
+        Alert.alert("Đăng nhập thành công!");
+        navigation.replace("Login");
+      } else alert("Email hoặc mật khẩu không chính xác!");
+    } else {
+      alert("Email hoặc mật khẩu không chính xác!");
+    }
+  };
+  // const checkLogin = async () => {
+  //   let userData = await AsyncStorage.getItem("curUser");
+  //   if (userData) navigation.replace("Sigin");
   // };
-  // // const checkLogin = async () => {
-  // //   let userData = await AsyncStorage.getItem("curUser");
-  // //   if (userData) navigation.replace("Sigin");
-  // // };
-  // // useEffect(() => {
-  // //   checkLogin();
-  // // }, []);
+  // useEffect(() => {
+  //   checkLogin();
+  // }, []);
 
   function goForgotPassword() {
     navigation.navigate("ForgotPassword");
