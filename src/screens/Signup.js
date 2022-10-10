@@ -4,6 +4,7 @@ import MainLogo from "../components/MainLogo";
 import MainInput from "../components/MainInput";
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 export default function Signup({ navigation }) {
   const [name, setname] = useState("");
@@ -28,36 +29,49 @@ export default function Signup({ navigation }) {
   };
 
   const createAccount = async () => {
-    let userData = await AsyncStorage.getItem("userData");
-    if (userData) {
-      userData = JSON.parse(userData);
-      let arr = [...userData];
-      arr = arr.filter(
-        (value) => value.email.toLocaleLowerCase() == email.toLocaleLowerCase()
-      );
-      if (arr.length > 0) {
-        alert("Email already registered!");
-        return;
-      } else {
-        userData.push({
-          name: name.trim(),
-          phone: phone.trim(),
-          email: email.trim(),
-          password: password.trim(),
-        });
-      }
-    } else {
-      userData = [];
-      userData.push({
+    // let userData = await AsyncStorage.getItem("userData");
+    // if (userData) {
+    //   userData = JSON.parse(userData);
+    //   let arr = [...userData];
+    //   arr = arr.filter(
+    //     (value) => value.email.toLocaleLowerCase() == email.toLocaleLowerCase()
+    //   );
+    //   if (arr.length > 0) {
+    //     alert("Email already registered!");
+    //     return;
+    //   } else {
+    //     userData.push({
+    //       name: name.trim(),
+    //       phone: phone.trim(),
+    //       email: email.trim(),
+    //       password: password.trim(),
+    //     });
+    //   }
+    // } else {
+    //   userData = [];
+    //   userData.push({
+    //     name: name.trim(),
+    //     phone: phone.trim(),
+    //     email: email.trim(),
+    //     password: password.trim(),
+    //   });
+    // }
+    // AsyncStorage.setItem("userData", JSON.stringify(userData));
+    // alert("Đăng ký thành công!");
+    // navigation.goBack();
+
+    try {
+      const res = await axios.post("http://192.168.239.188:3000/user/", {
         name: name.trim(),
         phone: phone.trim(),
         email: email.trim(),
         password: password.trim(),
       });
+      alert("Đăng ký thành công!");
+      navigation.goBack();
+    } catch (error) {
+      console.log(error);
     }
-    AsyncStorage.setItem("userData", JSON.stringify(userData));
-    alert("Đăng ký thành công!");
-    navigation.goBack();
   };
 
   return (

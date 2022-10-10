@@ -4,6 +4,7 @@ import MainLogo from "../components/MainLogo";
 import MainInput from "../components/MainInput";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 export default function Signin({ navigation }) {
   const [email, setemail] = useState("");
@@ -18,32 +19,39 @@ export default function Signin({ navigation }) {
     }
   };
   const login = async () => {
-    let userData = await AsyncStorage.getItem("userData");
-    if (userData) {
-      userData = JSON.parse(userData);
-      let arr = [...userData];
-      arr = arr.filter(
-        (value) =>
-          value.email.toLocaleLowerCase() == email.toLocaleLowerCase() &&
-          value.password == password
+    // let userData = await AsyncStorage.getItem("userData");
+    // if (userData) {
+    //   userData = JSON.parse(userData);
+    //   let arr = [...userData];
+    //   arr = arr.filter(
+    //     (value) =>
+    //       value.email.toLocaleLowerCase() == email.toLocaleLowerCase() &&
+    //       value.password == password
+    //   );
+    //   if (arr.length > 0) {
+    //     let curUser = arr[0];
+    //     AsyncStorage.setItem("curUser", JSON.stringify(curUser));
+    //     Alert.alert("Đăng nhập thành công!");
+    //     //navigation.replace("Login");
+    //     navigation.navigate("Products");
+    //   } else alert("Email hoặc mật khẩu không chính xác!");
+    // } else {
+    //   alert("Email hoặc mật khẩu không chính xác!");
+    // }
+
+    try {
+      const res = await axios.get(
+        `http://192.168.239.188:3000/user/${email.trim()}`
       );
-      if (arr.length > 0) {
-        let curUser = arr[0];
-        AsyncStorage.setItem("curUser", JSON.stringify(curUser));
-        Alert.alert("Đăng nhập thành công!");
-        navigation.replace("Login");
-      } else alert("Email hoặc mật khẩu không chính xác!");
-    } else {
-      alert("Email hoặc mật khẩu không chính xác!");
+      if (res.data.password == password.trim()) {
+        navigation.navigate("Products");
+      } else {
+        alert("Email hoặc mật khẩu không chính xác!");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
-  // const checkLogin = async () => {
-  //   let userData = await AsyncStorage.getItem("curUser");
-  //   if (userData) navigation.replace("Sigin");
-  // };
-  // useEffect(() => {
-  //   checkLogin();
-  // }, []);
 
   function goForgotPassword() {
     navigation.navigate("ForgotPassword");
@@ -52,11 +60,7 @@ export default function Signin({ navigation }) {
     <View style={styles.main}>
       <MainLogo title="Sign in" />
 
-      <MainInput
-        placeholder="E-mail or Phone Number"
-        value={email}
-        onChangeText={setemail}
-      />
+      <MainInput placeholder="E-mail" value={email} onChangeText={setemail} />
       <MainInput
         placeholder="Password"
         value={password}
