@@ -61,14 +61,22 @@ export default function Signup({ navigation }) {
     // navigation.goBack();
 
     try {
-      const res = await axios.post("http://192.168.239.188:3000/user/", {
-        name: name.trim(),
-        phone: phone.trim(),
-        email: email.trim(),
-        password: password.trim(),
-      });
-      alert("Đăng ký thành công!");
-      navigation.goBack();
+      const res = await axios.get(
+        `http://192.168.239.188:3000/user/${email.trim()}`
+      );
+      if (res.data.email == email.trim()) {
+        alert("Email đã được đăng ký!");
+        return;
+      } else {
+        const res = await axios.post("http://192.168.239.188:3000/user/", {
+          name: name.trim(),
+          phone: phone.trim(),
+          email: email.trim(),
+          password: password.trim(),
+        });
+        alert("Đăng ký thành công!");
+        navigation.goBack();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -93,6 +101,7 @@ export default function Signup({ navigation }) {
         placeholder="Password"
         value={password}
         onChangeText={setpassword}
+        password={true}
       />
       <View
         style={{

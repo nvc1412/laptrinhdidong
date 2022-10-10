@@ -14,10 +14,10 @@ export default function Login({ navigation }) {
     <View style={styles.main}>
       <Image source={require("../../assets/login.png")} />
 
-      <MainLogo title="Welcome to your" />
+      <MainLogo title="Welcome to App mobile" />
 
       <Text style={{ marginTop: 30, textAlign: "center" }}>
-        Welcome to your app. Build your own social network in minutes.
+        Welcome to App mobile. Let's go to buy now!
       </Text>
 
       <MainButton title={"Log In"} onPress={goSignin} />
@@ -35,7 +35,7 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: "#f8f8ff",
+    backgroundColor: "#CCFFFF",
     alignItems: "center",
     justifyContent: "center",
   },

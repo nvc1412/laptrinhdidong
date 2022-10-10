@@ -65,6 +65,7 @@ export default function Signin({ navigation }) {
         placeholder="Password"
         value={password}
         onChangeText={setpassword}
+        password={true}
       />
 
       <View

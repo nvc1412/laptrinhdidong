@@ -5,6 +5,7 @@ export default function MainInput(props) {
   return (
     <TextInput
       style={styles.input}
+      secureTextEntry={props.password}
       placeholder={props.placeholder}
       value={props.value}
       onChangeText={props.onChangeText}
