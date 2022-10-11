@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { Alert, ImageBackground, StyleSheet, Text, View } from "react-native";
 import MainButton from "../components/MainButton";
 import MainLogo from "../components/MainLogo";
 import MainInput from "../components/MainInput";
@@ -6,14 +6,14 @@ import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
-export default function Signin({ navigation }) {
+export default function DangNhap({ navigation }) {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const goToHome = () => {
     if (email.trim() == "" || !email) {
-      alert("Không được để trống email !");
+      Alert.alert("Thông báo", "Không được để trống email !");
     } else if (password.trim() == "" || !password) {
-      alert("Không được để trống mật khẩu !");
+      Alert.alert("Thông báo", "Không được để trống mật khẩu !");
     } else {
       login();
     }
@@ -41,10 +41,10 @@ export default function Signin({ navigation }) {
 
     try {
       const res = await axios.get(
-        `http://192.168.239.188:3000/user/${email.trim()}`
+        `http://192.168.201.188:3000/user/${email.trim()}`
       );
       if (res.data.password == password.trim()) {
-        navigation.navigate("Products");
+        navigation.navigate("HomeTabs");
       } else {
         alert("Email hoặc mật khẩu không chính xác!");
       }
@@ -53,12 +53,15 @@ export default function Signin({ navigation }) {
     }
   };
 
-  function goForgotPassword() {
-    navigation.navigate("ForgotPassword");
+  function goQuenMatKhau() {
+    navigation.navigate("Quên Mật Khẩu");
   }
   return (
-    <View style={styles.main}>
-      <MainLogo title="Sign in" />
+    <ImageBackground
+      source={require("../../assets/background.png")}
+      style={styles.main}
+    >
+      {/* <MainLogo title="Đăng Nhập" /> */}
 
       <MainInput placeholder="E-mail" value={email} onChangeText={setemail} />
       <MainInput
@@ -74,23 +77,25 @@ export default function Signin({ navigation }) {
           justifyContent: "center",
         }}
       >
-        <MainButton title="Log In" onPress={goToHome} />
+        <MainButton title="Đăng Nhập" onPress={goToHome} />
 
-        <Text style={{ fontSize: 20, color: "grey", marginTop: 30 }}>OR</Text>
+        <Text style={{ fontSize: 20, color: "#555555", marginTop: 30 }}>
+          OR
+        </Text>
 
         <MainButton
-          backgroundColor={{ backgroundColor: "#3b5998" }}
-          title="Forgot Password"
-          onPress={goForgotPassword}
+          backgroundColor={{ backgroundColor: "#0099FF" }}
+          title="Quên mật khẩu"
+          onPress={goQuenMatKhau}
         />
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: "#f8f8ff",
+    paddingTop: 100,
   },
 });

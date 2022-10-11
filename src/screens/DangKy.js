@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, ImageBackground, StyleSheet, Text, View } from "react-native";
 import MainButton from "../components/MainButton";
 import MainLogo from "../components/MainLogo";
 import MainInput from "../components/MainInput";
@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
-export default function Signup({ navigation }) {
+export default function DangKy({ navigation }) {
   const [name, setname] = useState("");
   const [phone, setphone] = useState("");
   const [email, setemail] = useState("");
@@ -16,13 +16,13 @@ export default function Signup({ navigation }) {
   };
   const onSignUp = () => {
     if (name.trim() == "" || !name) {
-      alert("Không được để trống họ và tên !");
+      Alert.alert("Thông báo", "Không được để trống họ và tên !");
     } else if (phone.trim() == "" || !phone) {
-      alert("Không được để trống phone !");
+      Alert.alert("Thông báo", "Không được để trống phone !");
     } else if (email.trim() == "" || !email) {
-      alert("Không được để trống email !");
+      Alert.alert("Thông báo", "Không được để trống email !");
     } else if (password.trim() == "" || !password) {
-      alert("Không được để trống mật khẩu !");
+      Alert.alert("Thông báo", "Không được để trống mật khẩu !");
     } else {
       createAccount();
     }
@@ -62,13 +62,13 @@ export default function Signup({ navigation }) {
 
     try {
       const res = await axios.get(
-        `http://192.168.239.188:3000/user/${email.trim()}`
+        `http://192.168.201.188:3000/user/${email.trim()}`
       );
       if (res.data.email == email.trim()) {
         alert("Email đã được đăng ký!");
         return;
       } else {
-        const res = await axios.post("http://192.168.239.188:3000/user/", {
+        const res = await axios.post("http://192.168.201.188:3000/user/", {
           name: name.trim(),
           phone: phone.trim(),
           email: email.trim(),
@@ -83,8 +83,11 @@ export default function Signup({ navigation }) {
   };
 
   return (
-    <View style={{ marginTop: 70 }}>
-      <MainLogo title="Create new account" />
+    <ImageBackground
+      source={require("../../assets/background.png")}
+      style={{ flex: 1, paddingTop: 70 }}
+    >
+      <MainLogo title="Tạo tài khoản" />
 
       <MainInput placeholder="Full Name" value={name} onChangeText={setname} />
       <MainInput
@@ -111,19 +114,18 @@ export default function Signup({ navigation }) {
         }}
       >
         <MainButton
-          backgroundColor={{ backgroundColor: "#3b5998" }}
+          //backgroundColor={{ backgroundColor: "#3b5998" }}
           title="Sign Up"
           onPress={onSignUp}
         />
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: "#f8f8ff",
     alignItems: "center",
     justifyContent: "center",
   },

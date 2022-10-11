@@ -14,13 +14,13 @@ const styles = StyleSheet.create({
   main: {
     borderWidth: 1,
     borderRadius: 20,
-    width: 200,
-    height: 50,
+    width: 250,
+    height: 55,
     marginTop: 30,
     justifyContent: "center",
     alignItems: "center",
-    borderColor: "#3975e8",
-    backgroundColor: "#3975e8",
+    borderColor: "#00CC33",
+    backgroundColor: "#00CC33",
   },
   title: {
     fontSize: 15,
