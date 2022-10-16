@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 export default function DangKy({ navigation }) {
+  const url = "http://192.168.0.104:3000";
   const [name, setname] = useState("");
   const [phone, setphone] = useState("");
   const [email, setemail] = useState("");
@@ -61,14 +62,12 @@ export default function DangKy({ navigation }) {
     // navigation.goBack();
 
     try {
-      const res = await axios.get(
-        `http://192.168.201.188:3000/user/${email.trim()}`
-      );
+      const res = await axios.get(`${url}/user/${email.trim()}`);
       if (res.data.email == email.trim()) {
         alert("Email đã được đăng ký!");
         return;
       } else {
-        const res = await axios.post("http://192.168.201.188:3000/user/", {
+        const res = await axios.post(`${url}/user/`, {
           name: name.trim(),
           phone: phone.trim(),
           email: email.trim(),

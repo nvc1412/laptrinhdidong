@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 export default function DangNhap({ navigation }) {
+  const url = "http://192.168.0.104:3000";
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const goToHome = () => {
@@ -40,9 +41,7 @@ export default function DangNhap({ navigation }) {
     // }
 
     try {
-      const res = await axios.get(
-        `http://192.168.201.188:3000/user/${email.trim()}`
-      );
+      const res = await axios.get(`${url}/user/${email.trim()}`);
       if (res.data.password == password.trim()) {
         navigation.navigate("HomeTabs");
       } else {
