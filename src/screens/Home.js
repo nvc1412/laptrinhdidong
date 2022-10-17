@@ -1,9 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, FlatList, Image, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Button,
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 export default function Home({ navigation }) {
-  const url = "http://192.168.0.104:3000";
+  const url = "http://192.168.161.188:3000";
   const [data, setdata] = useState([]);
 
   useEffect(function () {
@@ -17,7 +25,6 @@ export default function Home({ navigation }) {
   return (
     <FlatList
       style={styles.main}
-      //contentContainerStyle={{ flexDirection: "column" }}
       data={data}
       keyExtractor={(item, index) => item.id}
       renderItem={(itemData) => (
@@ -25,9 +32,8 @@ export default function Home({ navigation }) {
         <View style={styles.list}>
           <Image
             style={styles.img}
-            //source={require("../../assets/logo.png")}
             source={{
-              uri: `${itemData.item.image}`,
+              uri: itemData.item.image,
             }}
           ></Image>
           <Text>{itemData.item.name}</Text>

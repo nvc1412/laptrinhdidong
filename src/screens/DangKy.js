@@ -7,7 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 export default function DangKy({ navigation }) {
-  const url = "http://192.168.0.104:3000";
+  const url = "http://192.168.161.188:3000";
   const [name, setname] = useState("");
   const [phone, setphone] = useState("");
   const [email, setemail] = useState("");
