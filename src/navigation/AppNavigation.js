@@ -79,7 +79,11 @@ function StackNavigator() {
       />
       <Stack.Screen name="Products" component={Products} />
       <Stack.Screen name="Cài Đặt" component={CaiDat} />
-      <Stack.Screen name="HomeTabs" component={MyTabs} />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="HomeTabs"
+        component={MyTabs}
+      />
     </Stack.Navigator>
   );
 }

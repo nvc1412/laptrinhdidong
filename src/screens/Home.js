@@ -8,42 +8,94 @@ import {
   StyleSheet,
   Text,
   View,
+  SafeAreaView,
+  StatusBar,
+  ScrollView,
 } from "react-native";
+import { SearchBar } from "react-native-screens";
+import MainFooter from "../components/Footer";
+import MainHeader from "../components/Header";
 
 export default function Home({ navigation }) {
-  const url = "http://192.168.161.188:3000";
+  const url = "http://192.168.0.104:3000";
   const [data, setdata] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(function () {
-    fetch(`${url}/products/`)
-      .then((e) => e.json())
-      .then((rep) => setdata(rep))
+  // useEffect(() => {
+  //   //setIsLoading(true);
+  //   fetch(`${url}/products/`)
+  //     .then((e) => e.json())
+  //     .then((rep) => {
+  //       setdata(rep);
+  //       //setdata([...data, rep]);
+  //       //setIsLoading(false);
+  //     })
+
+  //     .catch((err) => {
+  //       setdata([]);
+  //     });
+  // }, []);
+
+  useEffect(() => {
+    setIsLoading(true);
+    axios
+      .get(`${url}/products/${currentPage}`)
+      .then((res) => {
+        // setdata([...data, res.data]);
+        setdata(data.concat(res.data));
+        setIsLoading(false);
+      })
       .catch((err) => {
         setdata([]);
       });
-  }, []);
+  }, [currentPage]);
+
+  const renderLoader = () => {
+    return isLoading ? (
+      <View
+        style={{
+          marginVertical: 16,
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator animating size="large" />
+      </View>
+    ) : null;
+  };
+
+  const LoadMoreItem = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
   return (
-    <FlatList
-      style={styles.main}
-      data={data}
-      keyExtractor={(item, index) => item.id}
-      renderItem={(itemData) => (
-        //<View style={styles.main}>
-        <View style={styles.list}>
-          <Image
-            style={styles.img}
-            source={{
-              uri: itemData.item.image,
-            }}
-          ></Image>
-          <Text>{itemData.item.name}</Text>
-          <Text>{itemData.item.color}</Text>
-          <Text>{itemData.item.price}</Text>
-        </View>
-        //</View>
-      )}
-      numColumns={2}
-    ></FlatList>
+    <SafeAreaView style={styles.AndroidSafeArea}>
+      <FlatList
+        //style={{ backgroundColor: "red" }}
+        ListHeaderComponent={MainHeader}
+        data={data}
+        numColumns={2}
+        keyExtractor={(item, index) => item.id}
+        renderItem={(itemData) => (
+          <View style={styles.wrap}>
+            <View style={styles.list}>
+              <Image
+                style={styles.img}
+                source={{
+                  uri: itemData.item.image,
+                }}
+              ></Image>
+              <Text>{itemData.item.name}</Text>
+              <Text>{itemData.item.color}</Text>
+              <Text>{itemData.item.price}</Text>
+            </View>
+          </View>
+        )}
+        ListFooterComponent={renderLoader}
+        onEndReached={LoadMoreItem}
+        onEndReachedThreshold={1}
+      />
+    </SafeAreaView>
   );
 }
 
@@ -55,13 +107,16 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     // alignItems: "center",
     //width: "99%",
-    backgroundColor: "#ffff",
+    //backgroundColor: "red",
+  },
+  wrap: {
+    flex: 1,
   },
   list: {
     backgroundColor: "#fff",
     margin: 5,
-    width: 168,
-    height: 250,
+    // width: 168,
+    // height: 250,
     alignItems: "center",
     borderWidth: 1,
     borderColor: "#cccc",
@@ -70,5 +125,8 @@ const styles = StyleSheet.create({
   img: {
     width: 150,
     height: 150,
+  },
+  AndroidSafeArea: {
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 });
