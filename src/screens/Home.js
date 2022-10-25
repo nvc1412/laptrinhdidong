@@ -11,13 +11,14 @@ import {
   SafeAreaView,
   StatusBar,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { SearchBar } from "react-native-screens";
 import MainFooter from "../components/Footer";
 import MainHeader from "../components/Header";
 
 export default function Home({ navigation }) {
-  const url = "http://192.168.0.104:3000";
+  const url = "http://192.168.251.188:3000";
   const [data, setdata] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -68,6 +69,17 @@ export default function Home({ navigation }) {
     setCurrentPage(currentPage + 1);
   };
 
+  const goProducts = () => {
+    //console.log({itemData.item.id });
+    navigation.navigate("Products");
+
+    // if (navigation) {
+    //   navigation.navigate("Products", {
+    //     itemData.item.id,
+    //   });
+    // }
+  };
+
   return (
     <SafeAreaView style={styles.AndroidSafeArea}>
       <FlatList
@@ -78,17 +90,18 @@ export default function Home({ navigation }) {
         keyExtractor={(item, index) => item.id}
         renderItem={(itemData) => (
           <View style={styles.wrap}>
-            <View style={styles.list}>
+            <TouchableOpacity style={styles.list} onPress={goProducts}>
               <Image
                 style={styles.img}
                 source={{
                   uri: itemData.item.image,
                 }}
               ></Image>
+              <Text>{itemData.item.id}</Text>
               <Text>{itemData.item.name}</Text>
               <Text>{itemData.item.color}</Text>
               <Text>{itemData.item.price}</Text>
-            </View>
+            </TouchableOpacity>
           </View>
         )}
         ListFooterComponent={renderLoader}

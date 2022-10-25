@@ -7,7 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 export default function DangNhap({ navigation }) {
-  const url = "http://192.168.0.104:3000";
+  const url = "http://192.168.251.188:3000";
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const goToHome = () => {
