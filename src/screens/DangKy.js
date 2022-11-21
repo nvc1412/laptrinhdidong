@@ -7,7 +7,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 export default function DangKy({ navigation }) {
-  const url = "http://192.168.251.188:3000";
+  const url = "http://192.168.0.103:3000";
+
   const [name, setname] = useState("");
   const [phone, setphone] = useState("");
   const [email, setemail] = useState("");
@@ -30,39 +31,8 @@ export default function DangKy({ navigation }) {
   };
 
   const createAccount = async () => {
-    // let userData = await AsyncStorage.getItem("userData");
-    // if (userData) {
-    //   userData = JSON.parse(userData);
-    //   let arr = [...userData];
-    //   arr = arr.filter(
-    //     (value) => value.email.toLocaleLowerCase() == email.toLocaleLowerCase()
-    //   );
-    //   if (arr.length > 0) {
-    //     alert("Email already registered!");
-    //     return;
-    //   } else {
-    //     userData.push({
-    //       name: name.trim(),
-    //       phone: phone.trim(),
-    //       email: email.trim(),
-    //       password: password.trim(),
-    //     });
-    //   }
-    // } else {
-    //   userData = [];
-    //   userData.push({
-    //     name: name.trim(),
-    //     phone: phone.trim(),
-    //     email: email.trim(),
-    //     password: password.trim(),
-    //   });
-    // }
-    // AsyncStorage.setItem("userData", JSON.stringify(userData));
-    // alert("Đăng ký thành công!");
-    // navigation.goBack();
-
     try {
-      const res = await axios.get(`${url}/user/${email.trim()}`);
+      const res = await axios.get(`${url}/user/email/${email.trim()}`);
       if (res.data.email == email.trim()) {
         alert("Email đã được đăng ký!");
         return;
@@ -112,11 +82,7 @@ export default function DangKy({ navigation }) {
           justifyContent: "center",
         }}
       >
-        <MainButton
-          //backgroundColor={{ backgroundColor: "#3b5998" }}
-          title="Sign Up"
-          onPress={onSignUp}
-        />
+        <MainButton title="Sign Up" onPress={onSignUp} />
       </View>
     </ImageBackground>
   );

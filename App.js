@@ -5,7 +5,3 @@ import Home from "./src/screens/Home";
 export default function App() {
   return <MainNavigator></MainNavigator>;
 }
-
-// export default function App() {
-//   return <Home />;
-// }

@@ -8,8 +8,11 @@ import QuenMatKhau from "../screens/QuenMatKhau";
 import Products from "../screens/Products";
 import Home from "../screens/Home";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import CaiDat from "../screens/CaiDat";
+import Profile from "../screens/Profile";
 import { Image } from "react-native";
+import ChiTietSP from "../screens/ChiTietSP";
+import GioHang from "../screens/GioHang";
+import Search from "../screens/Search";
 
 const Tab = createBottomTabNavigator();
 
@@ -43,16 +46,30 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="Cài Đặt"
-        component={CaiDat}
+        name="Profile"
+        component={Profile}
         options={{
           tabBarIcon: () => (
             <Image
               style={{ height: 30, width: 30 }}
               resizeMode="stretch"
-              source={require("../../assets/iconcaidat.png")}
+              source={require("../../assets/iconprofile.png")}
             />
           ),
+        }}
+      />
+      <Tab.Screen
+        name="GioHang"
+        component={GioHang}
+        options={{
+          tabBarIcon: () => (
+            <Image
+              style={{ height: 30, width: 30 }}
+              resizeMode="stretch"
+              source={require("../../assets/icongiohang.png")}
+            />
+          ),
+          tabBarBadge: 0,
         }}
       />
     </Tab.Navigator>
@@ -78,7 +95,10 @@ function StackNavigator() {
         component={Home}
       />
       <Stack.Screen name="Products" component={Products} />
-      <Stack.Screen name="Cài Đặt" component={CaiDat} />
+      <Stack.Screen name="Chi tiết sản phẩm" component={ChiTietSP} />
+      <Stack.Screen name="Kết quả tìm kiếm" component={Search} />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Giỏ hàng" component={GioHang} />
       <Stack.Screen
         options={{ headerShown: false }}
         name="HomeTabs"

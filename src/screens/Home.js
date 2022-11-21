@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Button,
@@ -12,134 +12,328 @@ import {
   StatusBar,
   ScrollView,
   TouchableOpacity,
+  TextInput,
+  Dimensions,
+  ImageBackground,
 } from "react-native";
-import { SearchBar } from "react-native-screens";
 import MainFooter from "../components/Footer";
-import MainHeader from "../components/Header";
+import MainBanner from "../components/Banner";
+import MainLogo from "../components/MainLogo";
+import Header from "../components/Header";
+import IconQuick from "../components/IconQuick";
+import HomeSP from "../components/HomeSP";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Home({ navigation }) {
-  const url = "http://192.168.251.188:3000";
-  const [data, setdata] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
+export default function Home() {
+  const navigation = useNavigation();
 
-  // useEffect(() => {
-  //   //setIsLoading(true);
-  //   fetch(`${url}/products/`)
-  //     .then((e) => e.json())
-  //     .then((rep) => {
-  //       setdata(rep);
-  //       //setdata([...data, rep]);
-  //       //setIsLoading(false);
-  //     })
+  const url = "http://192.168.0.103:3000";
 
-  //     .catch((err) => {
-  //       setdata([]);
-  //     });
-  // }, []);
+  const [dataSale, setdataSale] = useState([]);
+  const [dataWorldcup, setdataWorldcup] = useState([]);
+  const [dataTop, setdataTop] = useState([]);
+  const [dataNew, setdataNew] = useState([]);
+
+  const [textsearch, settextsearch] = useState("");
+
+  async function fetchData() {
+    try {
+      const res1 = await axios.get(`${url}/products/page/1`);
+      setdataSale(res1.data);
+      const res2 = await axios.get(`${url}/products/page/2`);
+      setdataWorldcup(res2.data);
+      const res3 = await axios.get(`${url}/products/page/3`);
+      setdataTop(res3.data);
+      const res4 = await axios.get(`${url}/products/page/4`);
+      setdataNew(res4.data);
+    } catch (error) {
+      setdataSale([]);
+      setdataWorldcup([]);
+      setdataTop([]);
+      setdataNew([]);
+    }
+  }
 
   useEffect(() => {
-    setIsLoading(true);
-    axios
-      .get(`${url}/products/${currentPage}`)
-      .then((res) => {
-        // setdata([...data, res.data]);
-        setdata(data.concat(res.data));
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setdata([]);
-      });
-  }, [currentPage]);
-
-  const renderLoader = () => {
-    return isLoading ? (
-      <View
-        style={{
-          marginVertical: 16,
-          alignItems: "center",
-        }}
-      >
-        <ActivityIndicator animating size="large" />
-      </View>
-    ) : null;
-  };
-
-  const LoadMoreItem = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  const goProducts = () => {
-    //console.log({itemData.item.id });
-    navigation.navigate("Products");
-
-    // if (navigation) {
-    //   navigation.navigate("Products", {
-    //     itemData.item.id,
-    //   });
-    // }
-  };
+    fetchData();
+  }, []);
 
   return (
-    <SafeAreaView style={styles.AndroidSafeArea}>
-      <FlatList
-        //style={{ backgroundColor: "red" }}
-        ListHeaderComponent={MainHeader}
-        data={data}
-        numColumns={2}
-        keyExtractor={(item, index) => item.id}
-        renderItem={(itemData) => (
-          <View style={styles.wrap}>
-            <TouchableOpacity style={styles.list} onPress={goProducts}>
-              <Image
-                style={styles.img}
-                source={{
-                  uri: itemData.item.image,
-                }}
-              ></Image>
-              <Text>{itemData.item.id}</Text>
-              <Text>{itemData.item.name}</Text>
-              <Text>{itemData.item.color}</Text>
-              <Text>{itemData.item.price}</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        ListFooterComponent={renderLoader}
-        onEndReached={LoadMoreItem}
-        onEndReachedThreshold={1}
+    <>
+      <Header
+        value={textsearch}
+        onChangeText={settextsearch}
+        onPress={() =>
+          navigation.navigate("Kết quả tìm kiếm", { name: textsearch })
+        }
       />
-    </SafeAreaView>
+
+      <ScrollView>
+        <View style={styles.header}>
+          <TouchableOpacity>
+            <Image
+              resizeMode="stretch"
+              source={require("../../assets/iconmenu.png")}
+            />
+          </TouchableOpacity>
+          <Text style={styles.logo}>STORE MOBILE</Text>
+          <TouchableOpacity>
+            <Image
+              resizeMode="stretch"
+              source={require("../../assets/icongiohang.png")}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <MainBanner />
+
+        <View
+          style={{
+            backgroundColor: "#fff",
+            //marginVertical: 5,
+            padding: 10,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <Image source={require("../../assets/gioithieu.png")} />
+
+            <Text
+              style={{
+                color: "black",
+                fontSize: 28,
+                textAlign: "center",
+                fontWeight: "bold",
+              }}
+            >
+              Giới Thiệu
+            </Text>
+            <Image source={require("../../assets/gioithieu.png")} />
+          </View>
+          <Text style={{ textAlign: "center", fontSize: 14 }}>
+            STORE MOBILE tổng hợp các mẫu điện thoại được ưa chuộng nhất hiện
+            nay với giá thành vô cùng hợp lý.
+          </Text>
+          <Text style={{ textAlign: "center", fontSize: 14 }}>
+            Quý khách hàng hãy nhanh tay sở hữu ngay hôm nay để đừng bỏ lỡ những
+            ưu đãi hấp dẫn.
+          </Text>
+        </View>
+
+        <View style={styles.icon}>
+          <IconQuick
+            source={require("../../assets/iconspiphone.png")}
+            onPress={() => {
+              navigation.navigate("Kết quả tìm kiếm", { maker: "iphone" });
+            }}
+          />
+          <IconQuick
+            source={require("../../assets/iconspsamsung.png")}
+            onPress={() => {
+              navigation.navigate("Kết quả tìm kiếm", { maker: "samsung" });
+            }}
+          />
+          <IconQuick
+            source={require("../../assets/iconspoppo.png")}
+            onPress={() => {
+              navigation.navigate("Kết quả tìm kiếm", { maker: "oppo" });
+            }}
+          />
+          <IconQuick
+            source={require("../../assets/iconspvivo.png")}
+            onPress={() => {
+              navigation.navigate("Kết quả tìm kiếm", { maker: "vivo" });
+            }}
+          />
+          <IconQuick
+            source={require("../../assets/iconsprealme.png")}
+            onPress={() => {
+              navigation.navigate("Kết quả tìm kiếm", { maker: "realme" });
+            }}
+          />
+          <IconQuick
+            source={require("../../assets/iconspxiaomi.png")}
+            onPress={() => {
+              navigation.navigate("Kết quả tìm kiếm", { maker: "xiaomi" });
+            }}
+          />
+        </View>
+
+        <View style={{ backgroundColor: "#201ce1", marginVertical: 5 }}>
+          <Image
+            style={{
+              width: Dimensions.get("window").width,
+              height: Dimensions.get("window").width / 10,
+            }}
+            resizeMode="stretch"
+            source={require("../../assets/sale.png")}
+          />
+          <FlatList
+            horizontal={true}
+            data={dataSale}
+            keyExtractor={(item, index) => item.id}
+            renderItem={(itemData) => (
+              <HomeSP
+                onPress={() => {
+                  navigation.navigate("Chi tiết sản phẩm", {
+                    idDetai: itemData.item.id,
+                  });
+                }}
+                img={itemData.item.image}
+                name={itemData.item.name}
+              />
+            )}
+          />
+        </View>
+        <View style={{ backgroundColor: "#081962", marginVertical: 5 }}>
+          <Image
+            style={{
+              width: Dimensions.get("window").width,
+              height: Dimensions.get("window").width / 10,
+            }}
+            resizeMode="stretch"
+            source={require("../../assets/worldcup.png")}
+          />
+          <FlatList
+            horizontal={true}
+            data={dataWorldcup}
+            keyExtractor={(item, index) => item.id}
+            renderItem={(itemData) => (
+              <HomeSP
+                onPress={() => {
+                  navigation.navigate("Chi tiết sản phẩm", {
+                    idDetai: itemData.item.id,
+                  });
+                }}
+                img={itemData.item.image}
+                name={itemData.item.name}
+              />
+            )}
+          />
+        </View>
+
+        <View style={{ backgroundColor: "#000723", marginVertical: 5 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Image source={require("../../assets/hot.gif")} />
+            <Text
+              style={{
+                color: "red",
+                fontSize: 25,
+                textAlign: "center",
+                fontWeight: "bold",
+                marginHorizontal: 10,
+              }}
+            >
+              Top điện thoại bán chạy
+            </Text>
+            <Image source={require("../../assets/hot.gif")} />
+          </View>
+          <FlatList
+            horizontal={true}
+            data={dataTop}
+            keyExtractor={(item, index) => item.id}
+            renderItem={(itemData) => (
+              <HomeSP
+                onPress={() => {
+                  navigation.navigate("Chi tiết sản phẩm", {
+                    idDetai: itemData.item.id,
+                  });
+                }}
+                img={itemData.item.image}
+                name={itemData.item.name}
+              />
+            )}
+          />
+        </View>
+        <View
+          style={{
+            backgroundColor: "#fcb7a0",
+            marginVertical: 5,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Image source={require("../../assets/new.gif")} />
+
+            <Text
+              style={{
+                color: "green",
+                fontSize: 25,
+                textAlign: "center",
+                fontWeight: "bold",
+                marginHorizontal: 10,
+              }}
+            >
+              Điện thoại mới về
+            </Text>
+            <Image source={require("../../assets/new.gif")} />
+          </View>
+          <FlatList
+            horizontal={true}
+            data={dataNew}
+            keyExtractor={(item, index) => item.id}
+            renderItem={(itemData) => (
+              <HomeSP
+                onPress={() => {
+                  navigation.navigate("Chi tiết sản phẩm", {
+                    idDetai: itemData.item.id,
+                  });
+                }}
+                img={itemData.item.image}
+                name={itemData.item.name}
+              />
+            )}
+          />
+        </View>
+
+        <MainFooter />
+      </ScrollView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    // flexDirection: "row",
-    // flexWrap: "wrap",
-    // justifyContent: "center",
-    // alignItems: "center",
-    //width: "99%",
-    //backgroundColor: "red",
-  },
-  wrap: {
-    flex: 1,
-  },
-  list: {
-    backgroundColor: "#fff",
-    margin: 5,
-    // width: 168,
-    // height: 250,
+  header: {
+    height: 70,
+    justifyContent: "space-between",
     alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#cccc",
-    borderRadius: 5,
+    flexDirection: "row",
+    backgroundColor: "#fff",
+    paddingHorizontal: 10,
   },
-  img: {
-    width: 150,
-    height: 150,
+  logo: {
+    textShadowOffset: {
+      height: 3,
+      width: 3,
+    },
+    textShadowColor: "gray",
+    textShadowRadius: 8,
+    color: "#EE0000",
+    fontSize: 25,
+    margin: 15,
+    fontWeight: "bold",
   },
-  AndroidSafeArea: {
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  icon: {
+    backgroundColor: "#F0FFF0",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
   },
 });

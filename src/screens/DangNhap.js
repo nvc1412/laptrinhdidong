@@ -7,7 +7,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 export default function DangNhap({ navigation }) {
-  const url = "http://192.168.251.188:3000";
+  const url = "http://192.168.0.103:3000";
+
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const goToHome = () => {
@@ -20,29 +21,15 @@ export default function DangNhap({ navigation }) {
     }
   };
   const login = async () => {
-    // let userData = await AsyncStorage.getItem("userData");
-    // if (userData) {
-    //   userData = JSON.parse(userData);
-    //   let arr = [...userData];
-    //   arr = arr.filter(
-    //     (value) =>
-    //       value.email.toLocaleLowerCase() == email.toLocaleLowerCase() &&
-    //       value.password == password
-    //   );
-    //   if (arr.length > 0) {
-    //     let curUser = arr[0];
-    //     AsyncStorage.setItem("curUser", JSON.stringify(curUser));
-    //     Alert.alert("Đăng nhập thành công!");
-    //     //navigation.replace("Login");
-    //     navigation.navigate("Products");
-    //   } else alert("Email hoặc mật khẩu không chính xác!");
-    // } else {
-    //   alert("Email hoặc mật khẩu không chính xác!");
-    // }
-
     try {
-      const res = await axios.get(`${url}/user/${email.trim()}`);
+      const res = await axios.get(`${url}/user/email/${email.trim()}`);
       if (res.data.password == password.trim()) {
+        AsyncStorage.setItem("iduser", JSON.stringify(res.data.id));
+        AsyncStorage.setItem("nameuser", res.data.name);
+        AsyncStorage.setItem("emailuser", res.data.email);
+        AsyncStorage.setItem("phoneuser", res.data.phone);
+        AsyncStorage.setItem("dateuser", res.data.date);
+        AsyncStorage.setItem("addressuser", res.data.address);
         navigation.navigate("HomeTabs");
       } else {
         alert("Email hoặc mật khẩu không chính xác!");
