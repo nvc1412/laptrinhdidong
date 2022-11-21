@@ -1,1 +1,1 @@
-Làm giao diện, chức năng đăng nhập, đăng ký
+Làm tất cả giao diện và chức năng của app
