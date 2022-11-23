@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -18,8 +19,10 @@ export default function ChiTietSP({ route }) {
   const navigation = useNavigation();
 
   const url = "http://192.168.0.103:3000";
+  const [userid, setuserid] = useState("");
   const [data, setdata] = useState([]);
   const [dataSPLQ, setdataSPLQ] = useState([]);
+  const [soluong, setsoluong] = useState(1);
 
   async function fetchData() {
     try {
@@ -37,11 +40,56 @@ export default function ChiTietSP({ route }) {
 
   useEffect(() => {
     fetchData();
+    AsyncStorage.getItem("iduser").then((res) => {
+      setuserid(res);
+    });
   }, []);
+
+  const ThemVaoGioHang = async () => {
+    let cartData = await AsyncStorage.getItem("cartData");
+    if (cartData) {
+      var Ktra = false;
+      cartData = JSON.parse(cartData);
+      for (var i = 0; i < cartData.length; i++) {
+        if (cartData[i].id == data[0].id) {
+          Ktra = true;
+          Alert.alert("Sản phẩm đã có trong giỏ hàng!");
+          break;
+        }
+      }
+      if (Ktra == false) {
+        Alert.alert("Thêm vào giỏ hàng thành công!");
+        cartData.push({
+          id: data[0].id,
+          name: data[0].name,
+          image: data[0].image,
+          price: data[0].price,
+          soluong: soluong,
+          color: data[0].color,
+          iduser: userid,
+        });
+      }
+    } else {
+      cartData = [];
+      Alert.alert("Thêm vào giỏ hàng thành công!");
+      cartData.push({
+        id: data[0].id,
+        name: data[0].name,
+        image: data[0].image,
+        price: data[0].price,
+        soluong: soluong,
+        color: data[0].color,
+        iduser: userid,
+      });
+    }
+    AsyncStorage.setItem("cartData", JSON.stringify(cartData));
+    navigation.navigate("GioHang");
+  };
 
   function format(n) {
     return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " VNĐ";
   }
+
   return (
     <>
       <FlatList
@@ -160,12 +208,7 @@ export default function ChiTietSP({ route }) {
                   borderRadius: 50,
                   elevation: 10,
                 }}
-                onPress={() => {
-                  // navigation.navigate("Giỏ hàng", {
-                  //   idSP: itemData.item.id,
-                  // });
-                  Alert.alert("Thêm vào giỏ hàng thành công!");
-                }}
+                onPress={ThemVaoGioHang}
               >
                 <Image
                   style={{ width: 50, height: 50 }}

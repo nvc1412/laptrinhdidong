@@ -15,6 +15,7 @@ import {
   TextInput,
   Dimensions,
   ImageBackground,
+  Alert,
 } from "react-native";
 import MainFooter from "../components/Footer";
 import MainBanner from "../components/Banner";
@@ -71,14 +72,22 @@ export default function Home() {
 
       <ScrollView>
         <View style={styles.header}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              Alert.alert("Chức năng đang hoàn thiện!");
+            }}
+          >
             <Image
               resizeMode="stretch"
               source={require("../../assets/iconmenu.png")}
             />
           </TouchableOpacity>
           <Text style={styles.logo}>STORE MOBILE</Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("GioHang");
+            }}
+          >
             <Image
               resizeMode="stretch"
               source={require("../../assets/icongiohang.png")}
@@ -91,7 +100,6 @@ export default function Home() {
         <View
           style={{
             backgroundColor: "#fff",
-            //marginVertical: 5,
             padding: 10,
           }}
         >
