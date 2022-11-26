@@ -4,8 +4,11 @@ import MainLogo from "../components/MainLogo";
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import SplashScreen from "./SplashScreen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function GioiThieu({ navigation }) {
+  const isFocused = useIsFocused();
   const [isLoading, setisLoading] = useState(true);
 
   function goDangNhap() {
@@ -17,9 +20,15 @@ export default function GioiThieu({ navigation }) {
 
   useEffect(() => {
     setTimeout(() => {
-      setisLoading(false);
+      AsyncStorage.getItem("emailuser").then((res) => {
+        if (res != null) {
+          navigation.navigate("HomeTabs");
+        } else {
+          setisLoading(false);
+        }
+      });
     }, 4500);
-  }, []);
+  }, [isFocused]);
 
   if (isLoading) {
     return <SplashScreen />;

@@ -25,7 +25,9 @@ import IconQuick from "../components/IconQuick";
 export default function Search({ route }) {
   const navigation = useNavigation();
 
-  const url = "http://192.168.0.103:3000";
+  // const url = "http://192.168.0.103:3300";
+  const url = "http://app-mobile-store.herokuapp.com";
+
   const [data, setdata] = useState([]);
   const [datasearch, setdatasearch] = useState([]);
 
@@ -61,37 +63,37 @@ export default function Search({ route }) {
         <IconQuick
           source={require("../../assets/iconspiphone.png")}
           onPress={() => {
-            navigation.replace("Kết quả tìm kiếm", { maker: "iphone" });
+            navigation.replace("Kết quả tìm kiếm", { maker: "iPhone" });
           }}
         />
         <IconQuick
           source={require("../../assets/iconspsamsung.png")}
           onPress={() => {
-            navigation.replace("Kết quả tìm kiếm", { maker: "samsung" });
+            navigation.replace("Kết quả tìm kiếm", { maker: "SamSung" });
           }}
         />
         <IconQuick
           source={require("../../assets/iconspoppo.png")}
           onPress={() => {
-            navigation.replace("Kết quả tìm kiếm", { maker: "oppo" });
+            navigation.replace("Kết quả tìm kiếm", { maker: "OPPO" });
           }}
         />
         <IconQuick
           source={require("../../assets/iconspvivo.png")}
           onPress={() => {
-            navigation.replace("Kết quả tìm kiếm", { maker: "vivo" });
+            navigation.replace("Kết quả tìm kiếm", { maker: "Vivo" });
           }}
         />
         <IconQuick
           source={require("../../assets/iconsprealme.png")}
           onPress={() => {
-            navigation.replace("Kết quả tìm kiếm", { maker: "realme" });
+            navigation.replace("Kết quả tìm kiếm", { maker: "Realme" });
           }}
         />
         <IconQuick
           source={require("../../assets/iconspxiaomi.png")}
           onPress={() => {
-            navigation.replace("Kết quả tìm kiếm", { maker: "xiaomi" });
+            navigation.replace("Kết quả tìm kiếm", { maker: "Xiaomi" });
           }}
         />
       </View>

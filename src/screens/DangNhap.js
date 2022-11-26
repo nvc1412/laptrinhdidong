@@ -7,7 +7,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 export default function DangNhap({ navigation }) {
-  const url = "http://192.168.0.103:3000";
+  // const url = "http://192.168.0.103:3300";
+  const url = "http://app-mobile-store.herokuapp.com";
 
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -22,7 +23,7 @@ export default function DangNhap({ navigation }) {
   };
   const login = async () => {
     try {
-      const res = await axios.get(`${url}/user/email/${email.trim()}`);
+      const res = await axios.get(`${url}/users/email/${email.trim()}`);
       if (res.data.password == password.trim()) {
         AsyncStorage.setItem("iduser", JSON.stringify(res.data.id));
         AsyncStorage.setItem("nameuser", res.data.name);

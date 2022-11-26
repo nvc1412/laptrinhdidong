@@ -29,7 +29,8 @@ import { useNavigation } from "@react-navigation/native";
 export default function Home() {
   const navigation = useNavigation();
 
-  const url = "http://192.168.0.103:3000";
+  // const url = "http://192.168.0.103:3300";
+  const url = "http://app-mobile-store.herokuapp.com";
 
   const [dataSale, setdataSale] = useState([]);
   const [dataWorldcup, setdataWorldcup] = useState([]);
@@ -138,37 +139,37 @@ export default function Home() {
           <IconQuick
             source={require("../../assets/iconspiphone.png")}
             onPress={() => {
-              navigation.navigate("Kết quả tìm kiếm", { maker: "iphone" });
+              navigation.navigate("Kết quả tìm kiếm", { maker: "iPhone" });
             }}
           />
           <IconQuick
             source={require("../../assets/iconspsamsung.png")}
             onPress={() => {
-              navigation.navigate("Kết quả tìm kiếm", { maker: "samsung" });
+              navigation.navigate("Kết quả tìm kiếm", { maker: "SamSung" });
             }}
           />
           <IconQuick
             source={require("../../assets/iconspoppo.png")}
             onPress={() => {
-              navigation.navigate("Kết quả tìm kiếm", { maker: "oppo" });
+              navigation.navigate("Kết quả tìm kiếm", { maker: "OPPO" });
             }}
           />
           <IconQuick
             source={require("../../assets/iconspvivo.png")}
             onPress={() => {
-              navigation.navigate("Kết quả tìm kiếm", { maker: "vivo" });
+              navigation.navigate("Kết quả tìm kiếm", { maker: "Vivo" });
             }}
           />
           <IconQuick
             source={require("../../assets/iconsprealme.png")}
             onPress={() => {
-              navigation.navigate("Kết quả tìm kiếm", { maker: "realme" });
+              navigation.navigate("Kết quả tìm kiếm", { maker: "Realme" });
             }}
           />
           <IconQuick
             source={require("../../assets/iconspxiaomi.png")}
             onPress={() => {
-              navigation.navigate("Kết quả tìm kiếm", { maker: "xiaomi" });
+              navigation.navigate("Kết quả tìm kiếm", { maker: "Xiaomi" });
             }}
           />
         </View>

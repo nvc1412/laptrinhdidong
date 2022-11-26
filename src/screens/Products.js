@@ -23,7 +23,10 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function Products() {
   const navigation = useNavigation();
-  const url = "http://192.168.0.103:3000";
+
+  // const url = "http://192.168.0.103:3300";
+  const url = "http://app-mobile-store.herokuapp.com";
+
   const [data, setdata] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 

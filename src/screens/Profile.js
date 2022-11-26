@@ -16,7 +16,8 @@ import {
 export default function Profile() {
   const navigation = useNavigation();
 
-  const url = "http://192.168.0.103:3000";
+  // const url = "http://192.168.0.103:3300";
+  const url = "http://app-mobile-store.herokuapp.com";
 
   const [userid, setuserid] = useState("");
   const [username, setusername] = useState("");
@@ -50,19 +51,19 @@ export default function Profile() {
 
   const DangXuat = () => {
     AsyncStorage.clear();
-    navigation.navigate("Đăng Nhập");
+    navigation.replace("Đăng Nhập");
   };
 
   const SuaTK = async () => {
     try {
-      const res = await axios.get(`${url}/user/email/${useremail.trim()}`);
+      const res = await axios.get(`${url}/users/email/${useremail.trim()}`);
 
       if (useremail.trim() != doiemail.trim() && res.data != "") {
         alert("Email đã được đăng ký!");
         setuseremail(doiemail.trim());
         return;
       } else {
-        const res = await axios.put(`${url}/user/${userid}`, {
+        const res = await axios.put(`${url}/users/${userid}`, {
           name: username.trim(),
           email: useremail.trim(),
           phone: userphone.trim(),

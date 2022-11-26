@@ -7,7 +7,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 export default function DangKy({ navigation }) {
-  const url = "http://192.168.0.103:3000";
+  // const url = "http://192.168.0.103:3300";
+  const url = "http://app-mobile-store.herokuapp.com";
 
   const [name, setname] = useState("");
   const [phone, setphone] = useState("");
@@ -32,14 +33,16 @@ export default function DangKy({ navigation }) {
 
   const createAccount = async () => {
     try {
-      const res = await axios.get(`${url}/user/email/${email.trim()}`);
+      const res = await axios.get(`${url}/users/email/${email.trim()}`);
       if (res.data.email == email.trim()) {
         alert("Email đã được đăng ký!");
         return;
       } else {
-        const res = await axios.post(`${url}/user/`, {
+        const res = await axios.post(`${url}/users/`, {
           name: name.trim(),
+          date: "01/01/2001",
           phone: phone.trim(),
+          address: "Hà Nội",
           email: email.trim(),
           password: password.trim(),
         });

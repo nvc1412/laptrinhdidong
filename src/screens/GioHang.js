@@ -18,7 +18,9 @@ export default function GioHang({ navigation, route }) {
 
   const isFocused = useIsFocused();
 
-  const url = "http://192.168.0.103:3000";
+  // const url = "http://192.168.0.103:3300";
+  const url = "http://app-mobile-store.herokuapp.com";
+
   const [data, setdata] = useState([]);
   const [soluong, setsoluong] = useState(1);
 
@@ -52,7 +54,7 @@ export default function GioHang({ navigation, route }) {
 
   const ThanhToan = async () => {
     for (let i = 0; i < data.length; i++) {
-      const res = await axios.post(`${url}/bill/`, {
+      const res = await axios.post(`${url}/bills/`, {
         idSP: data[i].id,
         idUS: data[i].iduser,
         tenKH: username,
