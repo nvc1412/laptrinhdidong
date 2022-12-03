@@ -8,7 +8,8 @@ import axios from "axios";
 
 export default function DangKy({ navigation }) {
   // const url = "http://192.168.0.103:3300";
-  const url = "http://app-mobile-store.herokuapp.com";
+  // const url = "http://app-mobile-store.herokuapp.com";
+  const url = "https://appmobile.onrender.com";
 
   const [name, setname] = useState("");
   const [phone, setphone] = useState("");

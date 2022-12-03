@@ -30,7 +30,8 @@ export default function Home() {
   const navigation = useNavigation();
 
   // const url = "http://192.168.0.103:3300";
-  const url = "http://app-mobile-store.herokuapp.com";
+  // const url = "http://app-mobile-store.herokuapp.com";
+  const url = "https://appmobile.onrender.com";
 
   const [dataSale, setdataSale] = useState([]);
   const [dataWorldcup, setdataWorldcup] = useState([]);

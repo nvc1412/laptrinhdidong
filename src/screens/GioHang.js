@@ -19,7 +19,8 @@ export default function GioHang({ navigation, route }) {
   const isFocused = useIsFocused();
 
   // const url = "http://192.168.0.103:3300";
-  const url = "http://app-mobile-store.herokuapp.com";
+  // const url = "http://app-mobile-store.herokuapp.com";
+  const url = "https://appmobile.onrender.com";
 
   const [data, setdata] = useState([]);
   const [soluong, setsoluong] = useState(1);
